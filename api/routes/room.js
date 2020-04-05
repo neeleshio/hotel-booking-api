@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 router.get('/rooms', (req, res, next) => {
     Room.find().select("title _id ")
         .then(doc => {
-            console.log(doc);
             res.status(200).json(doc);
         })
         .catch(err => console.log(err));
@@ -19,13 +18,11 @@ router.post('/admin/rooms', (req, res, next) => {
         title: req.body.title
     });
     room.save().then(result => {
-        console.log(result);
         res.status(200).json({
             message: 'room created',
             createdRoom: room
         });
     }).catch(err => {
-        console.log(err);
         res.status(500).json({ error: err });
     })
 });
